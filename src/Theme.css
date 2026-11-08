@@ -18,20 +18,26 @@ html, body {
   align-items: center;
   flex-direction: column;
   justify-content: center;
+
+  transition: background-color 0.3s ease, color 0.3s ease; 
 }
-.App.Dark {
-  background-color: black;
-  color: white;
+
+.App.dark {
+  background-color: black !important;
+  color: white !important;
 }
-.App.Pink {
-  background-color: pink;
-  color: black;
+
+.App.pink {
+  background-color: pink !important;
+  color: black !important;
 }
-/* .App.Light {
-  background-color: white;
-  color: black;
-} */
-.App.Blue {
-  background-color: blue;
-  color: white;
+
+.App.light {
+  background-color: white !important;
+  color: black !important;
+}
+
+.App.blue {
+  background-color: blue !important;
+  color: white !important;
 }

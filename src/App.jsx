@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import { FaMoon, FaSun } from "react-icons/fa6";
 import "./Theme.css";
 
 function App() {
@@ -34,17 +35,37 @@ function App() {
       <button onClick={() => setCount(count + 1)}>Counter {count}</button>
       <br /> <br />
       <div>
-        <button onClick={() => setTheme("Light")} style={{ marginRight: "20px" }}>
-          Light
+        <button
+          onClick={() => setTheme("light")}
+          style={{ marginRight: "20px" }}
+        >
+          light
         </button>
-        <button onClick={() => setTheme("Dark")} style={{ marginRight: "20px" }}>
-          Dark
+        <button
+          onClick={() => setTheme("dark")}
+          style={{ marginRight: "20px" }}
+        >
+          dark
         </button>
-        <button onClick={() => setTheme("Pink")} style={{ marginRight: "20px" }}>
-          Pink
+        <button
+          onClick={() => setTheme("pink")}
+          style={{ marginRight: "20px" }}
+        >
+          pink
         </button>
-        <button onClick={() => setTheme("Blue")} style={{ marginRight: "20px" }}>
-          Blue
+        <button
+          onClick={() => setTheme("blue")}
+          style={{ marginRight: "20px" }}
+        >
+          blue
+        </button>
+      </div>
+      <div>
+        <button
+          style={{ marginTop: "20px" }}
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        >
+          {theme === "dark" ? <FaSun /> : <FaMoon />}
         </button>
       </div>
     </div>
