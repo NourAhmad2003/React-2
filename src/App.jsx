@@ -2,6 +2,7 @@ import "./App.css";
 import { useReducer } from "react";
 import { FaMoon, FaSun } from "react-icons/fa6";
 import "./Theme.css";
+import { Link } from "react-router-dom";
 
 const initialData = { failed: "React", level: "beginner", color: "red", counter: 0, theme: "light" };
 const reducer = (state, action) => {
@@ -77,6 +78,8 @@ function App() {
           {Data.theme === "light" ? <FaMoon /> : <FaSun />}
         </button>
       </div>
+      <button>
+        <Link to="/home"> Go to home</Link></button>
     </div>
   );
 }
