@@ -1,71 +1,80 @@
 import "./App.css";
-import { useState } from "react";
+import { useReducer } from "react";
 import { FaMoon, FaSun } from "react-icons/fa6";
 import "./Theme.css";
 
+const initialData = { failed: "React", level: "beginner", color: "red", counter: 0, theme: "light" };
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "INCREASE":
+      return { ...state, counter: state.counter + 1 };
+    case "DECREASE":
+      return { ...state, counter: state.counter - 1 };
+    case "CHANGE_FIELD":
+      return { ...state, failed: action.newValue };
+    case "CHANGE_LEVEL":
+      return { ...state, level: action.newValue };
+    case "CHANGE_COLOR":
+      return { ...state, color: action.newValue };
+    case "CHANGE_THEME":
+      return { ...state, theme: action.newValue };
+    // case "RESET":
+    //   return initialData;
+    default:
+      return state;
+  }
+};
+
 function App() {
-  const [field, setField] = useState("React.js");
-  const [level, setLevel] = useState("Beginner");
-  const [color, setColor] = useState("red");
-  const changeLevel = () => {
-    setLevel("Intermediate");
-  };
-  const [count, setCount] = useState(0);
-  // const theme ="dark";
-  const [theme, setTheme] = useState("");
+  const [Data, dispatch] = useReducer(reducer,initialData);
   return (
-    <div className={`App ${theme}`}>
+    <div className={`App ${Data.theme}`}>
       <h1>vite project</h1>
-      <h2> My field is {field}</h2>
-      <button onClick={() => setField("Vue.js")}> Change field</button>
+      <h2> My field is {Data.failed} </h2>
+      <button onClick={() => {
+        dispatch({ type: "CHANGE_FIELD", newValue: "JavaScript" });
+      }
+      }> Change field</button>
       <br /> <br />
-      <h2> My level is {level}</h2>
-      <button
-        onClick={() => {
-          changeLevel();
-        }}
-      >
-        {" "}
-        Change level
-      </button>
+      <h2> I am a {Data.level}</h2>
+      <button onClick={() => {
+        dispatch({ type: "CHANGE_LEVEL", newValue: "intermediate" });
+      }
+      }>Change level </button>
       <br /> <br />
-      <h2> My favorite color is {color}</h2>
-      <button onClick={() => setColor("blue")}> Change color</button>
+      <h2> My favorite color is {Data.color} </h2>
+      <button onClick={() => {
+        dispatch({ type: "CHANGE_COLOR", newValue: "blue" });
+      }
+      }> Change color</button>
       <br /> <br />
-      <button onClick={() => setCount(count + 1)}>Counter {count}</button>
+      <button onClick={() => {
+        dispatch({ type: "INCREASE" });
+      }
+      }>Counter {Data.counter} </button>
       <br /> <br />
       <div>
-        <button
-          onClick={() => setTheme("light")}
-          style={{ marginRight: "20px" }}
-        >
-          light
-        </button>
-        <button
-          onClick={() => setTheme("dark")}
-          style={{ marginRight: "20px" }}
-        >
-          dark
-        </button>
-        <button
-          onClick={() => setTheme("pink")}
-          style={{ marginRight: "20px" }}
-        >
-          pink
-        </button>
-        <button
-          onClick={() => setTheme("blue")}
-          style={{ marginRight: "20px" }}
-        >
-          blue
-        </button>
+        <button style={{ marginRight: "20px" }} onClick={() => {
+          dispatch({ type: "CHANGE_THEME", newValue: "light" });
+        }}>light</button>
+        <button style={{ marginRight: "20px" }} onClick={() => {
+          dispatch({ type: "CHANGE_THEME", newValue: "dark" });
+        }}>dark</button>
+        <button style={{ marginRight: "20px" }} onClick={() => {
+          dispatch({ type: "CHANGE_THEME", newValue: "pink" });
+        }}>pink</button>
+        <button style={{ marginRight: "20px" }} onClick={() => {
+          dispatch({ type: "CHANGE_THEME", newValue: "blue" });
+        }}>blue </button>
       </div>
       <div>
         <button
-          style={{ marginTop: "20px" }}
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          style={{ marginTop: "20px" }} 
+          onClick={() => {
+            dispatch({ type: "CHANGE_THEME", newValue: Data.theme === "light" ? "dark" : "light" });
+          }}
         >
-          {theme === "dark" ? <FaSun /> : <FaMoon />}
+          {Data.theme === "light" ? <FaMoon /> : <FaSun />}
         </button>
       </div>
     </div>
